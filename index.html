@@ -2,128 +2,367 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prompts by Tezza</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <title> • TEZZA PROMPTS</title>
+
+  <!-- CONFIGURAÇÃO PARA O LINK -->
+  <meta property="og:title" content=" • TEZZA PROMPTS">
+  <meta property="og:description" content="TEZZA PROMPTS OFICIAL">
+  <meta property="og:type" content="website">
+  <meta name="description" content="TEZZA PROMPTS OFICIAL">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Bangers&family=Press+Start+2P&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0f0f0f;
-      color: #ffffff;
-      margin: 0;
-      padding: 0;
+    :root {
+      --naruto-orange: #FF6B00;
+      --naruto-yellow: #FCE300;
+      --manga-white: #ffffff;
+      --manga-black: #000000;
     }
-    header {
-      padding: 30px 20px;
-      text-align: center;
-      border-bottom: 1px solid #222;
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-      letter-spacing: 1px;
+
+    body{
+      font-family:'Poppins', sans-serif;
+      background: #000;
+      min-height:100vh;
+      overflow-x:hidden;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer; /* Ativa áudio ao clicar na página */
     }
-    header p {
+
+    .bg-image {
+      position: fixed;
+      inset: 0;
+      background: url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663690586917/apbDNuaoJzVJuUNs.webp') no-repeat center center fixed;
+      background-size: cover;
+      z-index: -1;
+      filter: brightness(0.6);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* HEADER EXCLUSIVO */
+    header{
+      position:relative;
+      z-index:2;
+      text-align:center;
+      padding:60px 20px 40px;
+      width: 100%;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .logo-gif {
+      width: 70px;
+      height: auto;
+      filter: drop-shadow(0 0 10px var(--naruto-orange));
+    }
+
+    /* Estilo compartilhado para os nomes em destaque */
+    .highlight-text {
+      font-family: 'Bangers', cursive;
+      color: var(--naruto-orange);
+      letter-spacing: 4px;
+      text-shadow: 
+        5px 5px 0px #000,
+        -1px -1px 0px #000,  
+        1px -1px 0px #000,
+        -1px  1px 0px #000,
+        1px  1px 0px #000;
+      transform: skew(-5deg);
+      display: inline-block;
+    }
+
+    .pixel-text {
+      font-size: 4.5rem;
+    }
+
+    .sub-title {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.7rem;
+      color: white;
       margin-top: 10px;
-      color: #aaa;
-      font-size: 0.95rem;
+      letter-spacing: 2px;
+      opacity: 0.9;
     }
-    .container {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
+
+    /* CONTAINER PRINCIPAL */
+    .main-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1000px;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .prompt-box {
-      background: #151515;
-      border: 1px solid #262626;
-      border-radius: 12px;
-      padding: 20px;
+
+    /* MANGA PANEL DESIGN */
+    .manga-frame {
+      position: relative;
+      width: 100%;
+      max-width: 750px;
+      background: var(--manga-white);
+      border: 6px solid var(--manga-black);
+      padding: 40px;
+      box-shadow: 15px 15px 0px var(--naruto-orange);
+      transform: rotate(-1deg);
+    }
+
+    .prompt-header {
+      display: flex;
+      flex-direction: column; /* Organiza em coluna */
+      align-items: center;
+      gap: 5px;
       margin-bottom: 25px;
+      border-bottom: 4px solid var(--manga-black);
+      padding-bottom: 15px;
     }
-    .prompt-title {
-      font-weight: bold;
-      margin-bottom: 10px;
-      font-size: 1.1rem;
+
+    .prompt-header .highlight-text {
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      text-shadow: 
+        3px 3px 0px #000,
+        -1px -1px 0px #000,  
+        1px -1px 0px #000,
+        -1px  1px 0px #000,
+        1px  1px 0px #000;
     }
-    pre {
+
+    .gemini-text {
+      font-family: 'Bangers', cursive;
+      font-size: 1.5rem;
+      color: var(--manga-black);
+      letter-spacing: 1px;
+      margin-top: -5px;
+    }
+
+    .prompt-display {
+      background: #f8f8f8;
+      border: 4px solid var(--manga-black);
+      padding: 30px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.15rem;
+      color: #111;
+      line-height: 1.6;
       white-space: pre-wrap;
       word-wrap: break-word;
-      background: #0d0d0d;
-      padding: 15px;
-      border-radius: 8px;
-      border: 1px solid #222;
-      font-size: 0.9rem;
-      line-height: 1.4;
-      user-select: text;
+      min-height: 180px;
+      position: relative;
+      box-shadow: inset 4px 4px 0px rgba(0,0,0,0.05);
     }
-    button {
-      margin-top: 12px;
-      background: #ffffff;
-      color: #000000;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 20px;
+
+    /* BOTÃO DE IMPACTO */
+    .copy-btn {
+      margin-top: 35px;
+      width: 100%;
+      padding: 22px;
+      font-family: 'Bangers', cursive;
+      font-size: 2.5rem;
+      background: var(--naruto-orange);
+      color: black;
+      border: 5px solid var(--manga-black);
       cursor: pointer;
-      font-weight: bold;
+      transition: 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      box-shadow: 8px 8px 0px var(--manga-black);
     }
-    button:hover {
-      background: #e0e0e0;
+
+    .copy-btn:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 12px 12px 0px var(--manga-black);
+      background: var(--naruto-yellow);
+      color: black;
     }
-    .hint {
-      margin-top: 10px;
-      font-size: 0.8rem;
-      color: #888;
+
+    .copy-btn:active {
+      transform: translate(5px, 5px);
+      box-shadow: 0px 0px 0px var(--manga-black);
     }
-    footer {
+
+    /* EFEITO DE FUMAÇA (JUTSU) */
+    .smoke-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.95);
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .smoke-overlay.active {
+      opacity: 1;
+    }
+
+    .jutsu-text {
+      font-family: 'Bangers', cursive;
+      font-size: 5rem;
+      color: var(--naruto-orange);
+      text-shadow: 3px 3px 0px #000;
+      animation: jutsuPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       text-align: center;
-      padding: 30px 20px;
-      font-size: 0.8rem;
-      color: #777;
-      border-top: 1px solid #222;
+    }
+
+    @keyframes jutsuPop {
+      0% { transform: scale(0) rotate(-10deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 60px 40px;
+      width: 100%;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.65rem;
+      color: white;
+      line-height: 2.5;
+    }
+
+    footer a {
+      color: var(--naruto-yellow);
+      text-decoration: none;
+      border-bottom: 2px solid var(--naruto-orange);
+    }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 900px) {
+      .main-content {
+        flex-direction: column;
+      }
+      .manga-frame {
+        transform: none;
+        padding: 30px 20px;
+      }
+      .pixel-text { font-size: 3.5rem; }
+      .jutsu-text { font-size: 3rem; }
     }
   </style>
 </head>
 
-<body>
+<body onclick="startAudioOnce()">
 
-<header>
-  <h1>Prompts by Tezza</h1>
-  <p>Página oficial para copiar prompts • Uso pessoal</p>
-</header>
+  <div class="bg-image"></div>
 
-<div class="container">
+  <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+    <!-- Link reserva -->
+    <source src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663690586917/audio_goosebumps_remix.mp3" type="audio/mpeg">
+  </audio>
 
-  <div class="prompt-box">
-    <div class="prompt-title">TEZZA PROMPTS
+  <header>
+    <div class="logo-container">
+      <img id="gifLeft" src="" class="logo-gif">
+      <h1 class="pixel-text highlight-text"></h1>
+      <img id="gifRight" src="" class="logo-gif" style="transform: scaleX(-1);">
     </div>
+    <p class="sub-title">TEZZA PROMPTS OFICIAL</p>
+  </header>
 
-<pre id="prompt1">(TEZZA PROMPTS)
+  <div class="main-content">
+    <div class="manga-frame">
+      <div class="prompt-header">
+        <h2 class="highlight-text"> COLABORADOR</h2>
+        <div class="gemini-text">GEMINI [MODO PRO]</div>
+      </div>
+      
+      <div class="prompt-display" id="promptContent">
 
-</pre>
+        
+        [COLOQUE O SEU PROMPT AQUI[
 
-    <button onclick="copyFallback('prompt1')">Copiar Prompt</button>
-    <div class="hint">Se o botão não funcionar, selecione o texto e copie manualmente.</div>
+        
+      </div>
+
+      <button class="copy-btn" onclick="copyPrompt(event)">COPIAR PROMPT</button>
+    </div>
   </div>
 
-</div>
+  <div class="smoke-overlay" id="smoke">
+    <div class="jutsu-text">PROMPT COPIADO!</div>
+    <p style="color: black; font-family: 'Bangers', cursive; font-size: 2rem; text-align: center; margin-top: 10px;">MARQUE @</p>
+  </div>
 
-<footer>
-  © Prompts by Tezza — Conteúdo protegido. Não redistribuir.
-</footer>
+  <footer>
+    MARQUE <a href="#">@_.raij</a><br>
+     • TEZZA PROMPTS — CONTEÚDO PROTEGIDO
+  </footer>
 
-<script>
-  function copyFallback(id) {
-    const el = document.getElementById(id);
-    const range = document.createRange();
-    range.selectNodeContents(el);
-    const selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
-    document.execCommand('copy');
-    selection.removeAllRanges();
-    alert('Prompt copiado!');
-  }
-</script>
+  <script>
+    const gifUrl = "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWx6ejR5Mjg2d3BqOGs3eDRudHEyZ2NqM2o0cngyaWdoaHE3Mmx6bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/ob3jIqFGOY3nnXdAsv/giphy.gif";
+    const music = document.getElementById('bgMusic');
+    let audioStarted = false;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('gifLeft').src = gifUrl;
+      document.getElementById('gifRight').src = gifUrl;
+      music.volume = 0.5;
+    });
+
+    function startAudioOnce() {
+      if (!audioStarted) {
+        music.play().then(() => {
+          audioStarted = true;
+        }).catch(err => console.log("Aguardando interação para áudio..."));
+      }
+    }
+
+    async function copyPrompt(event) {
+      event.stopPropagation();
+      startAudioOnce();
+
+      const text = document.getElementById('promptContent').innerText;
+      
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (err) {
+        const tempInput = document.createElement('textarea');
+        tempInput.value = text;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+      }
+
+      const smoke = document.getElementById('smoke');
+      smoke.classList.add('active');
+      
+      setTimeout(() => {
+        smoke.classList.remove('active');
+      }, 1500);
+    }
+  </script>
 
 </body>
 </html>
