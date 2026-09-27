@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- CONFIGURAÇÃO PARA O LINK LIMPO (OPEN GRAPH) -->
+  <title>MAKEY • TEZZA PROMPTS</title>
+  <meta name="description" content="TEZZA PROMPTS OFICIAL">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tezza-prompts.github.io/COLABORADOR-MAKEY/COPIAR%20CHAT GPT.html">
+  <meta property="og:title" content="MAKEY • TEZZA PROMPTS">
+  <meta property="og:description" content="TEZZA PROMPTS OFICIAL">
+  <!-- Sem imagem para o card de compartilhamento não mostrar GIFs ou o fundo -->
+  <meta property="og:image" content="">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="MAKEY • TEZZA PROMPTS">
+  <meta name="twitter:description" content="TEZZA PROMPTS OFICIAL">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Bangers&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --brand-red: #d90429;
+      --brand-red-dark: #8f001c;
+      --brand-yellow: #ffd60a;
+      --manga-white: #ffffff;
+      --manga-black: #000000;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #170006;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .bg-image {
+      position: fixed;
+      inset: 0;
+      background-image: url('./assets/background.jpeg'), url('https://i.imgur.com/g5Fv6AI.jpeg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      background-size: cover;
+      z-index: -2;
+      filter: brightness(0.52) saturate(1.18) contrast(1.08);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at center, rgba(217, 4, 41, 0.12) 0%, transparent 42%),
+        linear-gradient(135deg, rgba(110, 0, 20, 0.48), rgba(0, 0, 0, 0.82));
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    header {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 76px 20px 40px;
+      width: 100%;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .highlight-text {
+      font-family: 'Bangers', cursive;
+      color: var(--brand-yellow);
+      letter-spacing: 4px;
+      text-shadow:
+        5px 5px 0 var(--brand-red-dark),
+        -2px -2px 0 var(--manga-black),
+        2px -2px 0 var(--manga-black),
+        -2px 2px 0 var(--manga-black),
+        2px 2px 0 var(--manga-black);
+      transform: skew(-5deg);
+      display: inline-block;
+    }
+
+    .pixel-text {
+      font-size: 4.5rem;
+    }
+
+    .sub-title {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.7rem;
+      color: var(--brand-yellow);
+      margin-top: 10px;
+      letter-spacing: 2px;
+      opacity: 0.95;
+      text-shadow: 2px 2px 0 var(--brand-red-dark);
+    }
+
+    .main-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1000px;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .manga-frame {
+      position: relative;
+      width: 100%;
+      max-width: 750px;
+      background: var(--manga-white);
+      border: 6px solid var(--manga-black);
+      padding: 40px;
+      box-shadow: 15px 15px 0 var(--brand-yellow), 20px 20px 0 var(--brand-red);
+      transform: rotate(-1deg);
+    }
+
+    .prompt-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 25px;
+      padding-bottom: 0;
+    }
+
+    .prompt-line-row {
+      display: flex;
+      align-items: flex-end;
+      width: 100%;
+      height: 58px;
+      border-bottom: 4px solid var(--brand-red);
+      margin-top: 4px;
+    }
+
+    .prompt-side-gif {
+      display: block;
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      flex: 0 0 auto;
+      margin-bottom: -4px;
+      z-index: 1;
+    }
+
+    .prompt-line-space {
+      flex: 1;
+    }
+
+    .prompt-header .highlight-text {
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      color: var(--brand-red);
+      text-shadow:
+        3px 3px 0 var(--brand-yellow),
+        -1px -1px 0 var(--manga-black),
+        1px -1px 0 var(--manga-black),
+        -1px 1px 0 var(--manga-black),
+        1px 1px 0 var(--manga-black);
+    }
+
+    .CHAT GPT-text {
+      font-family: 'Bangers', cursive;
+      font-size: 1.5rem;
+      color: var(--manga-black);
+      letter-spacing: 1px;
+      margin-top: -5px;
+    }
+
+    .prompt-display {
+      background: #fffbea;
+      border: 4px solid var(--manga-black);
+      padding: 30px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.15rem;
+      color: #111;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      min-height: 180px;
+      position: relative;
+      box-shadow: inset 4px 4px 0 rgba(217, 4, 41, 0.14);
+    }
+
+    .copy-btn {
+      margin-top: 35px;
+      width: 100%;
+      padding: 22px;
+      font-family: 'Bangers', cursive;
+      font-size: 2.5rem;
+      background: var(--brand-red);
+      color: var(--brand-yellow);
+      border: 5px solid var(--manga-black);
+      cursor: pointer;
+      transition: 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      box-shadow: 8px 8px 0 var(--manga-black);
+    }
+
+    .copy-btn:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 12px 12px 0 var(--manga-black);
+      background: var(--brand-yellow);
+      color: var(--brand-red-dark);
+    }
+
+    .copy-btn:active {
+      transform: translate(5px, 5px);
+      box-shadow: 0 0 0 var(--manga-black);
+    }
+
+    .smoke-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 250, 220, 0.96);
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .smoke-overlay.active {
+      opacity: 1;
+    }
+
+    .jutsu-text {
+      font-family: 'Bangers', cursive;
+      font-size: 5rem;
+      color: var(--brand-red);
+      text-shadow: 3px 3px 0 var(--brand-yellow), 4px 4px 0 var(--manga-black);
+      animation: jutsuPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-align: center;
+    }
+
+    @keyframes jutsuPop {
+      0% { transform: scale(0) rotate(-10deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 60px 40px;
+      width: 100%;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.65rem;
+      color: white;
+      line-height: 2.5;
+    }
+
+    footer a {
+      color: var(--brand-yellow);
+      text-decoration: none;
+      border-bottom: 2px solid var(--brand-red);
+    }
+
+    .footer-gif {
+      display: block;
+      width: 92px;
+      height: 92px;
+      object-fit: contain;
+      margin: 0 auto 8px;
+    }
+
+    @media (max-width: 900px) {
+      .manga-frame {
+        transform: none;
+        padding: 30px 20px;
+      }
+
+      .pixel-text {
+        font-size: 3.5rem;
+      }
+
+      .jutsu-text {
+        font-size: 3rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      header {
+        padding-top: 76px;
+      }
+
+      .pixel-text {
+        font-size: 2.8rem;
+      }
+
+      .sub-title {
+        font-size: 0.55rem;
+        line-height: 1.8;
+      }
+
+      .prompt-header .highlight-text {
+        font-size: 1.75rem;
+      }
+
+      .prompt-side-gif {
+        width: 48px;
+        height: 48px;
+      }
+
+      .prompt-display {
+        padding: 20px;
+        font-size: 1rem;
+      }
+
+      .copy-btn {
+        font-size: 2rem;
+      }
+
+      .footer-gif {
+        width: 76px;
+        height: 76px;
+      }
+    }
+  </style>
+</head>
+
+<body onclick="startAudioOnce()">
+
+  <div class="bg-image"></div>
+
+  <!--
+    O player procura musicmakey.mp3 na mesma pasta da HTML ou dentro de ./assets/.
+  -->
+  <audio id="bgMusic" loop preload="auto"></audio>
+
+  <header>
+    <div class="logo-container">
+      <h1 class="pixel-text highlight-text">MAKEY</h1>
+    </div>
+    <p class="sub-title">TEZZA PROMPTS OFICIAL</p>
+  </header>
+
+  <div class="main-content">
+    <div class="manga-frame">
+      <div class="prompt-header">
+        <h2 class="highlight-text">MAKEY COLABORADOR</h2>
+        <div class="CHAT GPT-text">CHAT GPT</div>
+        <div class="prompt-line-row">
+          <span class="prompt-side-gif gif-slot" data-gif-slot="side-left" aria-hidden="true"></span>
+          <span class="prompt-line-space"></span>
+          <span class="prompt-side-gif gif-slot" data-gif-slot="side-right" aria-hidden="true" style="transform: scaleX(-1);"></span>
+        </div>
+      </div>
+
+      <div class="prompt-display" id="promptContent">
+
+[Ultra-realistic cinematic avatar 3D male portrait, Blender Cycles render in CGI, inspired by Seedream 5.0 realism and high-end IMVU/The Sims virtual aesthetics. Clearly a fictional digital avatar and not a real photograph. Hyper-detailed virtual influencer design with stylized CGI masculine proportions, luxury editorial aesthetics, advanced cinematic lighting, ultra-polished 3D rendering, and “TEZZA PROMPTS” text at the bottom center in elegant minimalist typography.
+
+CAMERA & COMPOSITION
+
+Use the supplied image as the absolute and primary visual reference. Preserve the exact vertical 9:16 composition, full-body framing, camera angle, perspective, subject scale, crop, and centered positioning shown in the reference. Subject is photographed from head to shoes, standing centrally on a waterfront promenade. Maintain the slightly low-to-natural full-body camera perspective, with the entire body visible and sufficient environmental space surrounding the subject. Preserve the visible black framing areas at the extreme top and bottom of the original reference if they are part of the source composition. The waterfront, railing, suspension bridge, distant hillside buildings, ocean, and sky must remain positioned exactly according to the reference. Do not change the camera angle, crop, perspective, or composition.
+
+POSE & BODY POSITIONING
+
+Preserve the exact masculine standing pose from the reference. Subject stands upright with both legs naturally separated, feet firmly positioned on the ground, and body facing mostly toward the camera while maintaining a subtle relaxed asymmetry. Both hands are inserted naturally into the front pockets of the trousers. Elbows remain slightly bent and positioned outward, creating a confident masculine silhouette. Shoulders relaxed and naturally squared. Torso slightly elongated with chest naturally projected forward. Preserve the exact leg positioning, foot placement, weight distribution, hip alignment, arm positioning, and overall body posture from the reference. Do not cross the legs or alter the stance.
+
+HEAD POSITION & GAZE
+
+Preserve the exact head orientation from the reference. Head turned slightly toward the subject's left side, with the face looking toward the distant scenery rather than directly into the camera. Chin remains naturally positioned with a subtle lateral head orientation. Sunglasses remain aligned naturally with the face and gaze direction. Do not rotate the head toward the camera or change the gaze direction.
+
+FACIAL EXPRESSION
+
+Preserve the calm, composed, confident masculine expression visible beneath the sunglasses. Facial muscles remain relaxed and natural, with a subtle sophisticated editorial presence. No smile, exaggerated emotion, or dramatic facial expression. Maintain the exact expression and emotional neutrality of the reference.
+
+FACE & IDENTITY
+
+Use the supplied image as the strict visual reference for the male avatar's identity and facial structure while maintaining the fictional CGI-avatar appearance. Preserve the visible masculine facial proportions, jawline, cheekbone structure, nose shape, lips, chin, facial symmetry, and overall identity. The face is partially concealed by dark sunglasses, but all visible facial characteristics must remain faithful to the reference. Preserve the natural masculine facial proportions and refined virtual-influencer appearance. Do not invent a different identity, alter facial structure, feminize the face, exaggerate features, or replace the reference identity.
+
+HAIR
+
+Preserve the exact hairstyle from the reference. Short black hair with dense volume on top, naturally textured and styled upward with a slightly tousled modern finish. Hair has defined individual strands and subtle natural movement while maintaining the exact overall silhouette, length, density, color, hairline, and volume shown in the reference. Do not change the hairstyle, color, length, or direction.
+
+ACCESSORIES & DETAILS
+
+Preserve all visible accessories exactly as shown in the reference. Dark rectangular sunglasses with black lenses and a refined masculine frame remain mandatory. Preserve the silver-toned necklace with a small rectangular pendant positioned naturally at the center of the chest. Preserve the wrist accessories, including the visible metallic watch or bracelet on the wrist, with the same placement and proportions. Maintain all jewelry reflections and physical material properties. Do not add, remove, replace, or reinterpret accessories.
+
+OUTFIT
+
+Preserve the exact outfit from the reference. Subject wears an open short-sleeve black button-up shirt with a relaxed masculine fit, exposing the chest and abdomen. Shirt remains open down the front with natural fabric folds and realistic sleeve positioning. Preserve the exact black color, material appearance, collar structure, button placement, sleeve length, fit, and open styling.
+
+Subject wears fitted off-white or cream-colored trousers with a clean minimalist design, natural waistband structure, subtle fabric folds, and a straight tapered silhouette. Preserve the exact color, fit, length, pocket placement, waistband, seams, wrinkles, and overall appearance.
+
+Preserve the clean white low-top sneakers exactly as shown, including their silhouette, sole thickness, laces, material, color, and placement on the feet. Do not replace or modify the footwear.
+
+BODY & PHYSIQUE
+
+Preserve the athletic masculine physique visible in the reference. Broad shoulders, muscular arms, defined chest, pronounced abdominal definition, narrow waist, strong legs, and balanced masculine proportions. Maintain the exact muscularity and body proportions shown without exaggeration. Preserve the natural anatomical transitions between shoulders, arms, chest, abdomen, hips, and legs. Do not make the subject significantly larger, thinner, shorter, or more muscular than the reference.
+
+SKIN & REALISM
+
+Preserve the warm natural skin tone and realistic complexion visible in the reference. Render detailed CGI skin with realistic pores, subtle texture variation, natural highlights, physically accurate subsurface scattering, and realistic skin response to sunlight. Preserve natural body skin texture across the face, neck, chest, arms, abdomen, and legs. Maintain realistic muscle definition without plastic smoothing or artificial skin. The CGI rendering should enhance the reference while preserving its original visual characteristics.
+
+LIGHTING
+
+Preserve the strong natural daylight illumination from the reference. Bright warm sunlight illuminates the subject from the front and side, creating defined highlights across the hair, face, shoulders, arms, chest, abdomen, trousers, and shoes. Maintain realistic directional sunlight, natural contact shadows, subtle reflected light from the water, and cinematic contrast. Preserve the bright blue-sky atmosphere and warm outdoor color temperature. Do not introduce studio lighting, flash lighting, nighttime lighting, colored artificial lights, or unrelated illumination.
+
+ENVIRONMENT
+
+Preserve the exact waterfront environment from the reference. Subject stands on a modern paved waterfront promenade beside a dark metal railing with horizontal cables and a wooden upper handrail. Behind the subject is a large body of blue water extending across the scene. Preserve the distant hillside populated with dense buildings and vegetation, along with the large suspension bridge extending across the water in the background. Maintain the bright blue sky filled with large detailed white cumulus clouds. Preserve the exact environmental depth, geographic composition, railing structure, pavement, water reflections, distant architecture, bridge placement, and horizon line. Do not replace or simplify the environment.
+
+MOOD & AESTHETIC
+
+Preserve the sophisticated luxury summer lifestyle aesthetic of the reference. Modern masculine fashion editorial combined with premium travel photography, waterfront lifestyle, relaxed confidence, and high-end virtual influencer aesthetics. The atmosphere is bright, elegant, natural, confident, stylish, and aspirational while remaining faithful to the original reference. Maintain a realistic outdoor vacation-editorial feeling without introducing unrelated concepts.
+
+STYLE & RENDER QUALITY
+
+Ultra-photorealistic Blender Cycles CGI render, cinematic realism, Seedream 5.0 masculine beauty rendering, 8K UHD quality, physically accurate lighting and materials, realistic skin micro-detail, IMVU-inspired avatar repaint aesthetics, high-fidelity masculine CGI rendering, realistic atmospheric depth, polished virtual influencer styling, advanced ray tracing, realistic reflections, luxury editorial lighting, ultra-clean cinematic render quality, and clearly fictional CGI-avatar aesthetics instead of a real photograph.]
+
+      </div>
+
+      <button class="copy-btn" onclick="copyPrompt(event)">COPIAR PROMPT</button>
+    </div>
+  </div>
+
+  <div class="smoke-overlay" id="smoke">
+    <div class="jutsu-text">PROMPT COPIADO!</div>
+    <p style="color: var(--brand-red-dark); font-family: 'Bangers', cursive; font-size: 2rem; text-align: center; margin-top: 10px;">MARQUE <a href="https://www.instagram.com/makeyonix/" target="_blank" rel="noopener noreferrer">@makeyonix</a></p>
+  </div>
+
+  <footer>
+    <span class="footer-gif gif-slot" data-gif-slot="footer" aria-hidden="true"></span>
+    MARQUE <a href="https://www.instagram.com/makeyonix/" target="_blank" rel="noopener noreferrer">@makeyonix</a><br>
+    MAKEY • TEZZA PROMPTS — CONTEÚDO PROTEGIDO
+  </footer>
+
+  <script>
+    const music = document.getElementById('bgMusic');
+    const localMusicPaths = ['./musicmakey.mp3', './assets/musicmakey.mp3'];
+    const gifSources = {
+      side: {
+        local: './assets/gif-side.gif',
+        fallback: 'https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyZWYwOXR5MDBiamU0ZWd6cWJpd3R0MzZmcTB5d2treHQwNXNub2FhMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/zhrlcZJsvQWDm/giphy.gif'
+      },
+      footer: {
+        local: './assets/gif-right.gif',
+        fallback: 'https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUydjVsYmlld2x6b2N2ZnZmMWg1ZWkweHl6YTFlaGllcjN5cTlzMzhhYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/EGcbDftfJ5ocM/giphy.gif'
+      }
+    };
+    let audioStarted = false;
+    let audioAvailable = false;
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      document.querySelectorAll('[data-gif-slot]').forEach((slot) => {
+        const kind = slot.dataset.gifSlot === 'footer' ? 'footer' : 'side';
+        const image = document.createElement('img');
+        const source = gifSources[kind];
+        image.className = slot.className.replace('gif-slot', '').trim();
+        image.alt = 'GIF decorativo da MAKEY';
+        image.src = source.local;
+        image.onerror = () => {
+          image.onerror = null;
+          image.src = source.fallback;
+        };
+        if (slot.dataset.gifSlot === 'side-right') {
+          image.style.transform = 'scaleX(-1)';
+        }
+        slot.replaceWith(image);
+      });
+
+      for (const localMusicPath of localMusicPaths) {
+        try {
+          const response = await fetch(localMusicPath, { method: 'HEAD' });
+          if (response.ok) {
+            const source = document.createElement('source');
+            source.src = localMusicPath;
+            source.type = 'audio/mpeg';
+            music.appendChild(source);
+            music.load();
+            music.volume = 0.5;
+            audioAvailable = true;
+            break;
+          }
+        } catch (error) {
+          console.info(`Arquivo de áudio não encontrado em ${localMusicPath}.`);
+        }
+      }
+    });
+
+    function startAudioOnce() {
+      if (!audioAvailable || audioStarted) return;
+
+      music.play().then(() => {
+        audioStarted = true;
+      }).catch(() => {
+        console.info('Aguardando interação para áudio...');
+      });
+    }
+
+    async function copyPrompt(event) {
+      event.stopPropagation();
+      startAudioOnce();
+
+      const text = document.getElementById('promptContent').innerText;
+
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (err) {
+        const tempInput = document.createElement('textarea');
+        tempInput.value = text;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+      }
+
+      const smoke = document.getElementById('smoke');
+      smoke.classList.add('active');
+
+      setTimeout(() => {
+        smoke.classList.remove('active');
+      }, 1500);
+    }
+  </script>
+
+</body>
+</html>
