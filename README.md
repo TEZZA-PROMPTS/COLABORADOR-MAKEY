@@ -1,6 +1,6 @@
 TEZZA-PROMPTS 🧠🔒
 
-Repositório privado de prompts de IA desenvolvido por TEZZA-PROMPTS, com colaboração de ℭ𝔞𝔯𝔩𝔬𝔰 𝔈𝔡𝔲𝔞𝔯𝔡𝔬 ℜ𝔞𝔦𝔧, destinado exclusivamente ao uso interno e ao canal oficial.
+Repositório privado de prompts de IA desenvolvido por TEZZA-PROMPTS, com colaboração de MAKEY destinado exclusivamente ao uso interno e ao canal oficial.
 
 Este projeto não é open source e não autoriza redistribuição, repostagem ou reutilização em outros canais, sejam públicos ou privados.
 
@@ -13,7 +13,7 @@ Uso exclusivo no canal TEZZA-PROMPTS
 Testes, ajustes e refinamento de prompts de IA
 Centralização do fluxo criativo
 
-Todos os prompts aqui presentes são de autoria da TEZZA-PROMPTS e fazem parte de um processo contínuo de desenvolvimento, podendo contar com contribuições do colaborador ℭ𝔞𝔯𝔩𝔬𝔰 𝔈𝔡𝔲𝔞𝔯𝔡𝔬 ℜ𝔞𝔦𝔧 .
+Todos os prompts aqui presentes são de autoria da TEZZA-PROMPTS e fazem parte de um processo contínuo de desenvolvimento, podendo contar com contribuições do colaborador MAKEY.
 
 📦 Conteúdo
 
