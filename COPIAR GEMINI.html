@@ -4,12 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+  <!-- CONFIGURAÇÃO PARA O LINK LIMPO (OPEN GRAPH) -->
   <title>MAKEY • TEZZA PROMPTS</title>
+  <meta name="description" content="TEZZA PROMPTS OFICIAL">
 
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tezza-prompts.github.io/COLABORADOR-MAKEY/COPIAR%20GEMINI.html">
   <meta property="og:title" content="MAKEY • TEZZA PROMPTS">
   <meta property="og:description" content="TEZZA PROMPTS OFICIAL">
-  <meta property="og:type" content="website">
-  <meta name="description" content="TEZZA PROMPTS OFICIAL">
+  <!-- Sem imagem para o card de compartilhamento não mostrar GIFs ou o fundo -->
+  <meta property="og:image" content="">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="MAKEY • TEZZA PROMPTS">
+  <meta name="twitter:description" content="TEZZA PROMPTS OFICIAL">
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Bangers&family=Press+Start+2P&display=swap" rel="stylesheet">
 
@@ -147,6 +155,7 @@
     }
 
     .prompt-side-gif {
+      display: block;
       width: 56px;
       height: 56px;
       object-fit: contain;
@@ -357,9 +366,9 @@
         <h2 class="highlight-text">MAKEY COLABORADOR</h2>
         <div class="gemini-text">GEMINI [MODO PRO]</div>
         <div class="prompt-line-row">
-          <img src="./assets/gif-side.gif" class="prompt-side-gif" alt="GIF decorativo da MAKEY" onerror="this.onerror=null;this.src='https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyZWYwOXR5MDBiamU0ZWd6cWJpd3R0MzZmcTB5d2treHQwNXNub2FhMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/zhrlcZJsvQWDm/giphy.gif';">
+          <span class="prompt-side-gif gif-slot" data-gif-slot="side-left" aria-hidden="true"></span>
           <span class="prompt-line-space"></span>
-          <img src="./assets/gif-side.gif" class="prompt-side-gif" alt="GIF decorativo da MAKEY" style="transform: scaleX(-1);" onerror="this.onerror=null;this.src='https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyZWYwOXR5MDBiamU0ZWd6cWJpd3R0MzZmcTB5d2treHQwNXNub2FhMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/zhrlcZJsvQWDm/giphy.gif';">
+          <span class="prompt-side-gif gif-slot" data-gif-slot="side-right" aria-hidden="true" style="transform: scaleX(-1);"></span>
         </div>
       </div>
 
@@ -379,7 +388,7 @@
   </div>
 
   <footer>
-    <img src="./assets/gif-right.gif" class="footer-gif" alt="GIF decorativo da MAKEY" onerror="this.onerror=null;this.src='https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUydjVsYmlld2x6b2N2ZnZmMWg1ZWkweHl6YTFlaGllcjN5cTlzMzhhYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/EGcbDftfJ5ocM/giphy.gif';">
+    <span class="footer-gif gif-slot" data-gif-slot="footer" aria-hidden="true"></span>
     MARQUE <a href="https://www.instagram.com/makeyonix/" target="_blank" rel="noopener noreferrer">@makeyonix</a><br>
     MAKEY • TEZZA PROMPTS — CONTEÚDO PROTEGIDO
   </footer>
@@ -387,10 +396,37 @@
   <script>
     const music = document.getElementById('bgMusic');
     const localMusicPaths = ['./musicmakey.mp3', './assets/musicmakey.mp3'];
+    const gifSources = {
+      side: {
+        local: './assets/gif-side.gif',
+        fallback: 'https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyZWYwOXR5MDBiamU0ZWd6cWJpd3R0MzZmcTB5d2treHQwNXNub2FhMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/zhrlcZJsvQWDm/giphy.gif'
+      },
+      footer: {
+        local: './assets/gif-right.gif',
+        fallback: 'https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUydjVsYmlld2x6b2N2ZnZmMWg1ZWkweHl6YTFlaGllcjN5cTlzMzhhYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/EGcbDftfJ5ocM/giphy.gif'
+      }
+    };
     let audioStarted = false;
     let audioAvailable = false;
 
     window.addEventListener('DOMContentLoaded', async () => {
+      document.querySelectorAll('[data-gif-slot]').forEach((slot) => {
+        const kind = slot.dataset.gifSlot === 'footer' ? 'footer' : 'side';
+        const image = document.createElement('img');
+        const source = gifSources[kind];
+        image.className = slot.className.replace('gif-slot', '').trim();
+        image.alt = 'GIF decorativo da MAKEY';
+        image.src = source.local;
+        image.onerror = () => {
+          image.onerror = null;
+          image.src = source.fallback;
+        };
+        if (slot.dataset.gifSlot === 'side-right') {
+          image.style.transform = 'scaleX(-1)';
+        }
+        slot.replaceWith(image);
+      });
+
       for (const localMusicPath of localMusicPaths) {
         try {
           const response = await fetch(localMusicPath, { method: 'HEAD' });
