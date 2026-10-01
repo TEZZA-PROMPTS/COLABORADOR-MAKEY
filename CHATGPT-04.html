@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- CONFIGURAÇÃO PARA O LINK LIMPO (OPEN GRAPH) -->
+  <title>MAKEY • TEZZA PROMPTS</title>
+  <meta name="description" content="TEZZA PROMPTS OFICIAL">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tezza-prompts.github.io/COLABORADOR-MAKEY/COPIAR%20CHAT GPT.html">
+  <meta property="og:title" content="MAKEY • TEZZA PROMPTS">
+  <meta property="og:description" content="TEZZA PROMPTS OFICIAL">
+  <!-- Sem imagem para o card de compartilhamento não mostrar GIFs ou o fundo -->
+  <meta property="og:image" content="">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="MAKEY • TEZZA PROMPTS">
+  <meta name="twitter:description" content="TEZZA PROMPTS OFICIAL">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Bangers&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --brand-red: #d90429;
+      --brand-red-dark: #8f001c;
+      --brand-yellow: #ffd60a;
+      --manga-white: #ffffff;
+      --manga-black: #000000;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #170006;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .bg-image {
+      position: fixed;
+      inset: 0;
+      background-image: url('./assets/background.jpeg'), url('https://i.imgur.com/g5Fv6AI.jpeg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      background-size: cover;
+      z-index: -2;
+      filter: brightness(0.52) saturate(1.18) contrast(1.08);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at center, rgba(217, 4, 41, 0.12) 0%, transparent 42%),
+        linear-gradient(135deg, rgba(110, 0, 20, 0.48), rgba(0, 0, 0, 0.82));
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    header {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 76px 20px 40px;
+      width: 100%;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .highlight-text {
+      font-family: 'Bangers', cursive;
+      color: var(--brand-yellow);
+      letter-spacing: 4px;
+      text-shadow:
+        5px 5px 0 var(--brand-red-dark),
+        -2px -2px 0 var(--manga-black),
+        2px -2px 0 var(--manga-black),
+        -2px 2px 0 var(--manga-black),
+        2px 2px 0 var(--manga-black);
+      transform: skew(-5deg);
+      display: inline-block;
+    }
+
+    .pixel-text {
+      font-size: 4.5rem;
+    }
+
+    .sub-title {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.7rem;
+      color: var(--brand-yellow);
+      margin-top: 10px;
+      letter-spacing: 2px;
+      opacity: 0.95;
+      text-shadow: 2px 2px 0 var(--brand-red-dark);
+    }
+
+    .main-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1000px;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .manga-frame {
+      position: relative;
+      width: 100%;
+      max-width: 750px;
+      background: var(--manga-white);
+      border: 6px solid var(--manga-black);
+      padding: 40px;
+      box-shadow: 15px 15px 0 var(--brand-yellow), 20px 20px 0 var(--brand-red);
+      transform: rotate(-1deg);
+    }
+
+    .prompt-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 25px;
+      padding-bottom: 0;
+    }
+
+    .prompt-line-row {
+      display: flex;
+      align-items: flex-end;
+      width: 100%;
+      height: 58px;
+      border-bottom: 4px solid var(--brand-red);
+      margin-top: 4px;
+    }
+
+    .prompt-side-gif {
+      display: block;
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      flex: 0 0 auto;
+      margin-bottom: -4px;
+      z-index: 1;
+    }
+
+    .prompt-line-space {
+      flex: 1;
+    }
+
+    .prompt-header .highlight-text {
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      color: var(--brand-red);
+      text-shadow:
+        3px 3px 0 var(--brand-yellow),
+        -1px -1px 0 var(--manga-black),
+        1px -1px 0 var(--manga-black),
+        -1px 1px 0 var(--manga-black),
+        1px 1px 0 var(--manga-black);
+    }
+
+    .CHAT GPT-text {
+      font-family: 'Bangers', cursive;
+      font-size: 1.5rem;
+      color: var(--manga-black);
+      letter-spacing: 1px;
+      margin-top: -5px;
+    }
+
+    .prompt-display {
+      background: #fffbea;
+      border: 4px solid var(--manga-black);
+      padding: 30px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.15rem;
+      color: #111;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      min-height: 180px;
+      position: relative;
+      box-shadow: inset 4px 4px 0 rgba(217, 4, 41, 0.14);
+    }
+
+    .copy-btn {
+      margin-top: 35px;
+      width: 100%;
+      padding: 22px;
+      font-family: 'Bangers', cursive;
+      font-size: 2.5rem;
+      background: var(--brand-red);
+      color: var(--brand-yellow);
+      border: 5px solid var(--manga-black);
+      cursor: pointer;
+      transition: 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      box-shadow: 8px 8px 0 var(--manga-black);
+    }
+
+    .copy-btn:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 12px 12px 0 var(--manga-black);
+      background: var(--brand-yellow);
+      color: var(--brand-red-dark);
+    }
+
+    .copy-btn:active {
+      transform: translate(5px, 5px);
+      box-shadow: 0 0 0 var(--manga-black);
+    }
+
+    .smoke-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 250, 220, 0.96);
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .smoke-overlay.active {
+      opacity: 1;
+    }
+
+    .jutsu-text {
+      font-family: 'Bangers', cursive;
+      font-size: 5rem;
+      color: var(--brand-red);
+      text-shadow: 3px 3px 0 var(--brand-yellow), 4px 4px 0 var(--manga-black);
+      animation: jutsuPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-align: center;
+    }
+
+    @keyframes jutsuPop {
+      0% { transform: scale(0) rotate(-10deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 60px 40px;
+      width: 100%;
+      font-family: 'Press Start 2P', cursive;
+      font-size: 0.65rem;
+      color: white;
+      line-height: 2.5;
+    }
+
+    footer a {
+      color: var(--brand-yellow);
+      text-decoration: none;
+      border-bottom: 2px solid var(--brand-red);
+    }
+
+    .footer-gif {
+      display: block;
+      width: 92px;
+      height: 92px;
+      object-fit: contain;
+      margin: 0 auto 8px;
+    }
+
+    @media (max-width: 900px) {
+      .manga-frame {
+        transform: none;
+        padding: 30px 20px;
+      }
+
+      .pixel-text {
+        font-size: 3.5rem;
+      }
+
+      .jutsu-text {
+        font-size: 3rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      header {
+        padding-top: 76px;
+      }
+
+      .pixel-text {
+        font-size: 2.8rem;
+      }
+
+      .sub-title {
+        font-size: 0.55rem;
+        line-height: 1.8;
+      }
+
+      .prompt-header .highlight-text {
+        font-size: 1.75rem;
+      }
+
+      .prompt-side-gif {
+        width: 48px;
+        height: 48px;
+      }
+
+      .prompt-display {
+        padding: 20px;
+        font-size: 1rem;
+      }
+
+      .copy-btn {
+        font-size: 2rem;
+      }
+
+      .footer-gif {
+        width: 76px;
+        height: 76px;
+      }
+    }
+  </style>
+</head>
+
+<body onclick="startAudioOnce()">
+
+  <div class="bg-image"></div>
+
+  <!--
+    O player procura musicmakey.mp3 na mesma pasta da HTML ou dentro de ./assets/.
+  -->
+  <audio id="bgMusic" loop preload="auto"></audio>
+
+  <header>
+    <div class="logo-container">
+      <h1 class="pixel-text highlight-text">MAKEY</h1>
+    </div>
+    <p class="sub-title">TEZZA PROMPTS OFICIAL</p>
+  </header>
+
+  <div class="main-content">
+    <div class="manga-frame">
+      <div class="prompt-header">
+        <h2 class="highlight-text">MAKEY COLABORADOR</h2>
+        <div class="CHAT GPT-text">CHAT GPT</div>
+        <div class="prompt-line-row">
+          <span class="prompt-side-gif gif-slot" data-gif-slot="side-left" aria-hidden="true"></span>
+          <span class="prompt-line-space"></span>
+          <span class="prompt-side-gif gif-slot" data-gif-slot="side-right" aria-hidden="true" style="transform: scaleX(-1);"></span>
+        </div>
+      </div>
+
+      <div class="prompt-display" id="promptContent">
+
+[ Ultra-realistic cinematic avatar 3D female portrait, Blender Cycles render in CGI, inspired by Seedream 5.0 beauty realism and high-end IMVU/The Sims virtual aesthetics. Clearly a fictional digital avatar and not a real photograph. Hyper-detailed virtual influencer design with stylized CGI beauty proportions, luxury editorial aesthetics, advanced cinematic lighting, ultra-polished 3D rendering, and “TEZZA PROMPTS” text at the bottom center in elegant minimalist typography.
+
+CAMERA & COMPOSITION
+
+Vertical 9:16 portrait composition with a medium-full fashion portrait framing from the upper thighs to the top of the head. Camera positioned at approximately eye level, directly facing the subject, with a centered symmetrical composition. Subject occupies most of the frame, with the face, hair, robe, hands, and upper legs clearly visible. Soft cinematic depth of field keeps the subject sharply focused while the bathroom and pool area remain gently blurred in the background.
+
+POSE & BODY POSITIONING
+
+Adult female subject standing indoors in a relaxed and confident pose. Both arms are bent naturally in front of the body, with the hands gently holding and adjusting the tied front of the robe near the waist. Shoulders relaxed, torso facing the camera, hips aligned naturally, and legs positioned close together in a poised feminine stance. The robe falls open slightly at the front, creating a tasteful editorial silhouette while maintaining an elegant spa-lifestyle composition.
+
+HEAD POSITION & GAZE
+
+Head held upright with a subtle natural tilt toward the camera. Eyes directed straight into the lens with a calm, confident, and inviting gaze. Face positioned centrally beneath the softly styled hair, maintaining balanced facial alignment and direct visual connection with the viewer.
+
+FACIAL EXPRESSION
+
+Soft confident expression with relaxed eyes and gently closed glossy lips. Subtle sensual elegance without exaggeration, combining calm luxury-spa energy with polished social-media influencer presence. Expression remains natural, composed, and feminine.
+
+FACE & IDENTITY
+
+Adult female CGI avatar with delicate feminine facial structure, softly sculpted cheeks, a refined jawline, symmetrical facial proportions, warm light-to-medium skin tone, large almond-shaped brown eyes, naturally defined eyebrows, a slim straight nose, full glossy lips, and softly sculpted cheekbones. Skin rendering contains realistic texture, subtle pores, luminous highlights, and refined beauty realism while maintaining a stylized CGI avatar appearance instead of photoreal human rendering.
+
+HAIR
+
+Long dark brunette hair styled in large, soft, voluminous waves cascading over both shoulders and down the back. Hair features a natural center part, smooth salon-quality texture, realistic strand separation, gentle wave definition, silky highlights, and subtle flyaway strands around the face. Preserve the polished, feminine, softly tousled hairstyle with cinematic shine and natural volume.
+
+ACCESSORIES & DETAILS
+
+Minimal accessory styling with no visible jewelry, tattoos, piercings, or additional decorative elements. Preserve the natural hands and fingers as they gently hold the robe belt. Include realistic robe seams, belt loops, fabric edges, and subtle folds around the sleeves, waist, and front opening.
+
+OUTFIT
+
+Soft blush-pink satin or plush spa robe with a relaxed wrap silhouette, wide shawl collar, three-quarter-length sleeves, and a fabric belt tied at the front of the waist. The robe has a luxurious soft texture with realistic folds, gentle sheen, natural draping, and slightly open front edges. The garment reveals a tasteful portion of the upper chest, midriff, and upper thighs while preserving an elegant high-end wellness editorial aesthetic. Maintain the monochromatic pale pink color palette and refined spa-lifestyle styling.
+
+BODY & PHYSIQUE
+
+Curvy feminine physique with a defined waist, rounded hips, full natural proportions, smooth abdomen, shapely thighs, and elegant body transitions. Preserve realistic anatomical proportions and a polished feminine silhouette, with subtle cinematic CGI contour shading and natural posture.
+
+SKIN & REALISM
+
+Warm luminous skin tone with realistic tonal variation, subtle pores, fine natural texture, hydrated skin sheen, and physically accurate subsurface scattering. Soft highlights appear across the face, shoulders, chest, abdomen, hands, and legs. Maintain refined natural skin realism without excessive smoothing, artificial whitening, plastic effects, or exaggerated retouching.
+
+LIGHTING
+
+Soft diffused natural daylight entering through large bathroom windows, combined with gentle indoor ambient illumination. Balanced warm-neutral lighting creates smooth highlights on the skin, hair, satin robe, and bathroom surfaces. Preserve soft shadows, realistic reflections, subtle atmospheric depth, and a clean luxury-spa mood without harsh flash or dramatic colored lighting.
+
+ENVIRONMENT
+
+Elegant modern luxury bathroom or private spa interior with pale neutral walls, large bright windows, glossy light-colored surfaces, and a turquoise-blue indoor bathtub or pool visible behind the subject. Background includes subtle architectural details, clean glass surfaces, and softly illuminated water, creating a serene upscale wellness atmosphere. Keep the environment uncluttered, bright, and slightly defocused.
+
+MOOD & AESTHETIC
+
+Luxury spa-lifestyle aesthetic combined with polished beauty-editorial fashion, soft feminine confidence, wellness influencer energy, and premium virtual-avatar rendering. Serene, elegant, sensual without exaggeration, refined, luminous, clean, and high-status atmosphere with modern social-media editorial appeal.
+
+STYLE & RENDER QUALITY
+
+Ultra-photorealistic Blender Cycles CGI render, cinematic realism, Seedream 5.0 beauty rendering, 8K UHD quality, physically accurate lighting and materials, realistic skin micro-detail, IMVU-inspired beauty repaint style, high-fidelity feminine avatar rendering, realistic depth of field, glossy beauty aesthetic, polished virtual influencer atmosphere, advanced ray tracing, realistic reflections, luxury editorial lighting, ultra-clean cinematic render quality, and clearly fictional CGI avatar aesthetics instead of a real photograph.
+```]
+
+      </div>
+
+      <button class="copy-btn" onclick="copyPrompt(event)">COPIAR PROMPT</button>
+    </div>
+  </div>
+
+  <div class="smoke-overlay" id="smoke">
+    <div class="jutsu-text">PROMPT COPIADO!</div>
+    <p style="color: var(--brand-red-dark); font-family: 'Bangers', cursive; font-size: 2rem; text-align: center; margin-top: 10px;">MARQUE <a href="https://www.instagram.com/makeyonix/" target="_blank" rel="noopener noreferrer">@makeyonix</a></p>
+  </div>
+
+  <footer>
+    <span class="footer-gif gif-slot" data-gif-slot="footer" aria-hidden="true"></span>
+    MARQUE <a href="https://www.instagram.com/makeyonix/" target="_blank" rel="noopener noreferrer">@makeyonix</a><br>
+    MAKEY • TEZZA PROMPTS — CONTEÚDO PROTEGIDO
+  </footer>
+
+  <script>
+    const music = document.getElementById('bgMusic');
+    const localMusicPaths = ['./musicmakey.mp3', './assets/musicmakey.mp3'];
+    const gifSources = {
+      side: {
+        local: './assets/gif-side.gif',
+        fallback: 'https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyZWYwOXR5MDBiamU0ZWd6cWJpd3R0MzZmcTB5d2treHQwNXNub2FhMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/zhrlcZJsvQWDm/giphy.gif'
+      },
+      footer: {
+        local: './assets/gif-right.gif',
+        fallback: 'https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUydjVsYmlld2x6b2N2ZnZmMWg1ZWkweHl6YTFlaGllcjN5cTlzMzhhYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/EGcbDftfJ5ocM/giphy.gif'
+      }
+    };
+    let audioStarted = false;
+    let audioAvailable = false;
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      document.querySelectorAll('[data-gif-slot]').forEach((slot) => {
+        const kind = slot.dataset.gifSlot === 'footer' ? 'footer' : 'side';
+        const image = document.createElement('img');
+        const source = gifSources[kind];
+        image.className = slot.className.replace('gif-slot', '').trim();
+        image.alt = 'GIF decorativo da MAKEY';
+        image.src = source.local;
+        image.onerror = () => {
+          image.onerror = null;
+          image.src = source.fallback;
+        };
+        if (slot.dataset.gifSlot === 'side-right') {
+          image.style.transform = 'scaleX(-1)';
+        }
+        slot.replaceWith(image);
+      });
+
+      for (const localMusicPath of localMusicPaths) {
+        try {
+          const response = await fetch(localMusicPath, { method: 'HEAD' });
+          if (response.ok) {
+            const source = document.createElement('source');
+            source.src = localMusicPath;
+            source.type = 'audio/mpeg';
+            music.appendChild(source);
+            music.load();
+            music.volume = 0.5;
+            audioAvailable = true;
+            break;
+          }
+        } catch (error) {
+          console.info(`Arquivo de áudio não encontrado em ${localMusicPath}.`);
+        }
+      }
+    });
+
+    function startAudioOnce() {
+      if (!audioAvailable || audioStarted) return;
+
+      music.play().then(() => {
+        audioStarted = true;
+      }).catch(() => {
+        console.info('Aguardando interação para áudio...');
+      });
+    }
+
+    async function copyPrompt(event) {
+      event.stopPropagation();
+      startAudioOnce();
+
+      const text = document.getElementById('promptContent').innerText;
+
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (err) {
+        const tempInput = document.createElement('textarea');
+        tempInput.value = text;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+      }
+
+      const smoke = document.getElementById('smoke');
+      smoke.classList.add('active');
+
+      setTimeout(() => {
+        smoke.classList.remove('active');
+      }, 1500);
+    }
+  </script>
+
+</body>
+</html>
